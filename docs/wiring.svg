@@ -3,12 +3,12 @@
   <rect x="4" y="4" width="1112" height="792" fill="none" stroke="#cccccc" stroke-width="2"/>
 
   <text x="560" y="36" text-anchor="middle" font-size="24" font-weight="bold" fill="#111">Tractor Tilt Monitor — Wiring</text>
-  <text x="560" y="58" text-anchor="middle" font-size="14" fill="#555">Kubota EK1-261 · ESP-WROOM-32 central unit</text>
+  <text x="560" y="58" text-anchor="middle" font-size="14" fill="#555">Kubota EK1-261 · ESP-WROOM-32 central unit · USB powered</text>
 
   <!-- ===== Legend ===== -->
   <rect x="812" y="72" width="296" height="150" rx="8" fill="#fafafa" stroke="#ccc"/>
   <text x="826" y="94" font-size="13" font-weight="bold" fill="#333">Wire legend</text>
-  <line x1="826" y1="112" x2="866" y2="112" stroke="#d32f2f" stroke-width="4"/><text x="874" y="116" font-size="13" fill="#333">+5 V / +12 V power</text>
+  <line x1="826" y1="112" x2="866" y2="112" stroke="#d32f2f" stroke-width="4"/><text x="874" y="116" font-size="13" fill="#333">+5 V power</text>
   <line x1="826" y1="132" x2="866" y2="132" stroke="#222222" stroke-width="4"/><text x="874" y="136" font-size="13" fill="#333">GND</text>
   <line x1="826" y1="152" x2="866" y2="152" stroke="#f57c00" stroke-width="4"/><text x="874" y="156" font-size="13" fill="#333">3V3</text>
   <line x1="826" y1="172" x2="866" y2="172" stroke="#1976d2" stroke-width="4"/><text x="874" y="176" font-size="13" fill="#333">SDA (I2C data)</text>
@@ -20,9 +20,11 @@
   <text x="555" y="326" text-anchor="middle" font-size="17" font-weight="bold" fill="#223">ESP-WROOM-32</text>
   <text x="555" y="345" text-anchor="middle" font-size="12" fill="#556">central unit</text>
 
-  <!-- ESP32 pin labels -->
-  <rect x="416" y="358" width="8" height="8" fill="#333"/><text x="430" y="366" font-size="12" fill="#223">5V / VIN</text>
-  <rect x="416" y="406" width="8" height="8" fill="#333"/><text x="430" y="414" font-size="12" fill="#223">GND</text>
+  <!-- USB-C port on ESP32 left edge -->
+  <rect x="412" y="398" width="10" height="26" rx="3" fill="#444"/>
+  <text x="430" y="416" font-size="12" fill="#223">USB-C</text>
+
+  <!-- ESP32 pin labels (right + bottom) -->
   <rect x="686" y="356" width="8" height="8" fill="#333"/><text x="682" y="364" font-size="12" text-anchor="end" fill="#223">3V3</text>
   <rect x="686" y="396" width="8" height="8" fill="#333"/><text x="682" y="404" font-size="12" text-anchor="end" fill="#223">GND</text>
   <rect x="686" y="446" width="8" height="8" fill="#333"/><text x="682" y="454" font-size="12" text-anchor="end" fill="#223">G21 / SDA</text>
@@ -31,34 +33,13 @@
   <rect x="541" y="546" width="8" height="8" fill="#333"/><text x="545" y="540" font-size="12" text-anchor="middle" fill="#223">GND</text>
   <rect x="611" y="546" width="8" height="8" fill="#333"/><text x="615" y="540" font-size="12" text-anchor="middle" fill="#223">5V</text>
 
-  <!-- ===== Power: battery -> fuse -> diode -> LM2596 -> ESP32 ===== -->
-  <rect x="30" y="100" width="110" height="60" rx="6" fill="#fff" stroke="#333"/>
-  <text x="85" y="125" text-anchor="middle" font-size="13" font-weight="bold" fill="#222">12 V</text>
-  <text x="85" y="143" text-anchor="middle" font-size="11" fill="#555">battery (ign.)</text>
-  <text x="146" y="119" font-size="12" fill="#d32f2f">+</text>
-  <text x="146" y="152" font-size="12" fill="#222">−</text>
-
-  <rect x="150" y="150" width="70" height="28" rx="4" fill="#fff" stroke="#333"/><text x="185" y="169" text-anchor="middle" font-size="12" fill="#222">1 A fuse</text>
-  <rect x="150" y="205" width="70" height="28" rx="4" fill="#fff" stroke="#333"/><text x="185" y="224" text-anchor="middle" font-size="12" fill="#222">diode ▶</text>
-
-  <rect x="230" y="360" width="160" height="110" rx="8" fill="#fff" stroke="#333" stroke-width="2"/>
-  <text x="310" y="405" text-anchor="middle" font-size="14" font-weight="bold" fill="#222">LM2596</text>
-  <text x="310" y="424" text-anchor="middle" font-size="12" fill="#555">set OUT = 5.0 V</text>
-  <text x="236" y="384" font-size="11" fill="#333">IN+</text>
-  <text x="236" y="440" font-size="11" fill="#333">IN−</text>
-  <text x="384" y="384" font-size="11" text-anchor="end" fill="#333">OUT+</text>
-  <text x="384" y="440" font-size="11" text-anchor="end" fill="#333">OUT−</text>
-
-  <!-- +12V red: battery+ through fuse+diode down to IN+ -->
-  <polyline points="140,115 185,115 185,150" fill="none" stroke="#d32f2f" stroke-width="3"/>
-  <polyline points="185,178 185,205" fill="none" stroke="#d32f2f" stroke-width="3"/>
-  <polyline points="185,233 185,388 230,388" fill="none" stroke="#d32f2f" stroke-width="3"/>
-  <!-- -12V black: battery- to IN- -->
-  <polyline points="140,148 120,148 120,432 230,432" fill="none" stroke="#222222" stroke-width="3"/>
-  <!-- OUT+ -> ESP32 5V -->
-  <polyline points="390,388 405,388 405,362 416,362" fill="none" stroke="#d32f2f" stroke-width="3"/>
-  <!-- OUT- -> ESP32 GND -->
-  <polyline points="390,432 408,432 408,410 416,410" fill="none" stroke="#222222" stroke-width="3"/>
+  <!-- ===== USB power source ===== -->
+  <rect x="90" y="378" width="160" height="76" rx="8" fill="#fff" stroke="#333" stroke-width="2"/>
+  <text x="170" y="408" text-anchor="middle" font-size="14" font-weight="bold" fill="#222">USB port</text>
+  <text x="170" y="428" text-anchor="middle" font-size="12" fill="#555">in tractor (5 V)</text>
+  <!-- USB cable to ESP32 -->
+  <polyline points="250,416 412,411" fill="none" stroke="#666" stroke-width="6" stroke-linecap="round"/>
+  <text x="331" y="402" text-anchor="middle" font-size="12" fill="#444">USB 5 V cable</text>
 
   <!-- ===== I2C devices ===== -->
   <rect x="820" y="300" width="210" height="120" rx="8" fill="#fff" stroke="#333" stroke-width="2"/>
@@ -135,11 +116,11 @@
   <!-- +5V (red): ESP32 5V -> buzzer + -->
   <polyline points="615,554 615,595 660,595 660,620" fill="none" stroke="#d32f2f" stroke-width="3"/>
 
-  <!-- buzzer drive terminal -> collector (black-ish signal) -->
+  <!-- buzzer drive terminal -> collector -->
   <polyline points="660,676 660,700 560,700 560,660 520,660" fill="none" stroke="#222222" stroke-width="3"/>
 
   <!-- emitter -> GND (ESP32 bottom GND) -->
   <polyline points="475,710 475,750 545,750 545,554" fill="none" stroke="#222222" stroke-width="3"/>
 
-  <text x="560" y="784" text-anchor="middle" font-size="11" fill="#888">MPU 0x68 &amp; OLED 0x3C share one I2C bus (GPIO21 SDA / GPIO22 SCL). Set LM2596 to 5.0 V before connecting the ESP32.</text>
+  <text x="560" y="784" text-anchor="middle" font-size="11" fill="#888">MPU 0x68 &amp; OLED 0x3C share one I2C bus (GPIO21 SDA / GPIO22 SCL). Powered by USB 5 V from the tractor's port — no LM2596 needed.</text>
 </svg>

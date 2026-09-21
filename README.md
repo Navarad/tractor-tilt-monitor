@@ -15,10 +15,13 @@ threshold is exceeded.
 - **OLED 0.96" 128x64, I2C (SSD1306)** — shows tilt angles and status
 - **HITPOINT PK-20A38WQ** piezo buzzer — audible alarm
 - **DIOTEC BC337-40** NPN transistor — drives the buzzer
-- **CREATALL CA-2596 (LM2596)** DC-DC step-down — 12 V tractor → 5 V for the ESP32
 - **~1 kΩ resistor** — base resistor for the BC337
 - **S-BOX 116B** enclosure — mounting in the cabin
 - **ZY-60 breadboard** — prototyping before soldering
+
+Powered by **USB 5 V** from the tractor's USB port — just plug into the ESP32's
+USB-C. (A CREATALL CA-2596 / LM2596 step-down is only needed if you instead wire
+it to a raw 12 V circuit — not the case here.)
 
 ## Wiring diagram
 
@@ -60,21 +63,17 @@ GPIO25 ──[ 1k ]── B (BC337 base)
 The onboard **BOOT button (GPIO0)** is used to zero the tilt on flat ground
 (see Calibration).
 
-## Power from the tractor (12 V)
-```
-12V tractor ──[ 1A fuse ]──[ reverse-polarity diode ]── LM2596 IN+
-                                                         LM2596 IN-  ── GND
-LM2596 OUT+ (set to 5.0V!) ── ESP32 5V/VIN
-LM2596 OUT- ───────────────── ESP32 GND
-```
-1. **Before connecting the ESP32**, set the LM2596 trimmer to exactly **5.0 V**
-   (measure with a multimeter, no load).
-2. The fuse + diode (e.g. 1N5819 / 1N4007) protect against shorts and reverse
-   polarity.
-3. Automotive supplies have voltage spikes — add an electrolytic cap (~470 µF) on
-   the LM2596 input. The LM2596 accepts up to 40 V in.
-4. Feed it from a **switched (ignition) circuit**, not straight from the battery,
-   so it doesn't drain the battery while parked.
+## Power (USB)
+
+Plug the ESP32's **USB-C** into the tractor's **USB port (5 V)** — that's it. The
+buzzer's high side is tied to the ESP32 `5V` pin, which carries that USB 5 V.
+
+- During engine **cranking** the USB rail can dip and briefly reset the ESP32.
+  Harmless here, but if it bothers you, power it up after starting, or add a
+  ~470 µF cap across 5 V / GND.
+- Make sure the port can supply ~500 mA (most can).
+- If you ever power it from a raw **12 V** line instead, put an LM2596 step-down
+  set to **5.0 V** (plus a fuse and reverse-polarity diode) ahead of the ESP32.
 
 ## Calibration & setup
 
