@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 800" font-family="Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="1120" height="800" fill="#ffffff"/>
+  <rect x="4" y="4" width="1112" height="792" fill="none" stroke="#cccccc" stroke-width="2"/>
+
+  <text x="560" y="36" text-anchor="middle" font-size="24" font-weight="bold" fill="#111">Tractor Tilt Monitor — Wiring</text>
+  <text x="560" y="58" text-anchor="middle" font-size="14" fill="#555">Kubota EK1-261 · ESP-WROOM-32 central unit</text>
+
+  <!-- ===== Legend ===== -->
+  <rect x="812" y="72" width="296" height="150" rx="8" fill="#fafafa" stroke="#ccc"/>
+  <text x="826" y="94" font-size="13" font-weight="bold" fill="#333">Wire legend</text>
+  <line x1="826" y1="112" x2="866" y2="112" stroke="#d32f2f" stroke-width="4"/><text x="874" y="116" font-size="13" fill="#333">+5 V / +12 V power</text>
+  <line x1="826" y1="132" x2="866" y2="132" stroke="#222222" stroke-width="4"/><text x="874" y="136" font-size="13" fill="#333">GND</text>
+  <line x1="826" y1="152" x2="866" y2="152" stroke="#f57c00" stroke-width="4"/><text x="874" y="156" font-size="13" fill="#333">3V3</text>
+  <line x1="826" y1="172" x2="866" y2="172" stroke="#1976d2" stroke-width="4"/><text x="874" y="176" font-size="13" fill="#333">SDA (I2C data)</text>
+  <line x1="826" y1="192" x2="866" y2="192" stroke="#388e3c" stroke-width="4"/><text x="874" y="196" font-size="13" fill="#333">SCL (I2C clock)</text>
+  <line x1="826" y1="212" x2="866" y2="212" stroke="#7b1fa2" stroke-width="4"/><text x="874" y="216" font-size="13" fill="#333">GPIO signal</text>
+
+  <!-- ===== ESP32 central unit ===== -->
+  <rect x="420" y="300" width="270" height="250" rx="10" fill="#eef2ff" stroke="#334" stroke-width="2"/>
+  <text x="555" y="326" text-anchor="middle" font-size="17" font-weight="bold" fill="#223">ESP-WROOM-32</text>
+  <text x="555" y="345" text-anchor="middle" font-size="12" fill="#556">central unit</text>
+
+  <!-- ESP32 pin labels -->
+  <rect x="416" y="358" width="8" height="8" fill="#333"/><text x="430" y="366" font-size="12" fill="#223">5V / VIN</text>
+  <rect x="416" y="406" width="8" height="8" fill="#333"/><text x="430" y="414" font-size="12" fill="#223">GND</text>
+  <rect x="686" y="356" width="8" height="8" fill="#333"/><text x="682" y="364" font-size="12" text-anchor="end" fill="#223">3V3</text>
+  <rect x="686" y="396" width="8" height="8" fill="#333"/><text x="682" y="404" font-size="12" text-anchor="end" fill="#223">GND</text>
+  <rect x="686" y="446" width="8" height="8" fill="#333"/><text x="682" y="454" font-size="12" text-anchor="end" fill="#223">G21 / SDA</text>
+  <rect x="686" y="486" width="8" height="8" fill="#333"/><text x="682" y="494" font-size="12" text-anchor="end" fill="#223">G22 / SCL</text>
+  <rect x="466" y="546" width="8" height="8" fill="#333"/><text x="470" y="540" font-size="12" text-anchor="middle" fill="#223">G25</text>
+  <rect x="541" y="546" width="8" height="8" fill="#333"/><text x="545" y="540" font-size="12" text-anchor="middle" fill="#223">GND</text>
+  <rect x="611" y="546" width="8" height="8" fill="#333"/><text x="615" y="540" font-size="12" text-anchor="middle" fill="#223">5V</text>
+
+  <!-- ===== Power: battery -> fuse -> diode -> LM2596 -> ESP32 ===== -->
+  <rect x="30" y="100" width="110" height="60" rx="6" fill="#fff" stroke="#333"/>
+  <text x="85" y="125" text-anchor="middle" font-size="13" font-weight="bold" fill="#222">12 V</text>
+  <text x="85" y="143" text-anchor="middle" font-size="11" fill="#555">battery (ign.)</text>
+  <text x="146" y="119" font-size="12" fill="#d32f2f">+</text>
+  <text x="146" y="152" font-size="12" fill="#222">−</text>
+
+  <rect x="150" y="150" width="70" height="28" rx="4" fill="#fff" stroke="#333"/><text x="185" y="169" text-anchor="middle" font-size="12" fill="#222">1 A fuse</text>
+  <rect x="150" y="205" width="70" height="28" rx="4" fill="#fff" stroke="#333"/><text x="185" y="224" text-anchor="middle" font-size="12" fill="#222">diode ▶</text>
+
+  <rect x="230" y="360" width="160" height="110" rx="8" fill="#fff" stroke="#333" stroke-width="2"/>
+  <text x="310" y="405" text-anchor="middle" font-size="14" font-weight="bold" fill="#222">LM2596</text>
+  <text x="310" y="424" text-anchor="middle" font-size="12" fill="#555">set OUT = 5.0 V</text>
+  <text x="236" y="384" font-size="11" fill="#333">IN+</text>
+  <text x="236" y="440" font-size="11" fill="#333">IN−</text>
+  <text x="384" y="384" font-size="11" text-anchor="end" fill="#333">OUT+</text>
+  <text x="384" y="440" font-size="11" text-anchor="end" fill="#333">OUT−</text>
+
+  <!-- +12V red: battery+ through fuse+diode down to IN+ -->
+  <polyline points="140,115 185,115 185,150" fill="none" stroke="#d32f2f" stroke-width="3"/>
+  <polyline points="185,178 185,205" fill="none" stroke="#d32f2f" stroke-width="3"/>
+  <polyline points="185,233 185,388 230,388" fill="none" stroke="#d32f2f" stroke-width="3"/>
+  <!-- -12V black: battery- to IN- -->
+  <polyline points="140,148 120,148 120,432 230,432" fill="none" stroke="#222222" stroke-width="3"/>
+  <!-- OUT+ -> ESP32 5V -->
+  <polyline points="390,388 405,388 405,362 416,362" fill="none" stroke="#d32f2f" stroke-width="3"/>
+  <!-- OUT- -> ESP32 GND -->
+  <polyline points="390,432 408,432 408,410 416,410" fill="none" stroke="#222222" stroke-width="3"/>
+
+  <!-- ===== I2C devices ===== -->
+  <rect x="820" y="300" width="210" height="120" rx="8" fill="#fff" stroke="#333" stroke-width="2"/>
+  <text x="925" y="322" text-anchor="middle" font-size="14" font-weight="bold" fill="#222">GY-521 (MPU-6050)</text>
+  <text x="925" y="339" text-anchor="middle" font-size="11" fill="#555">accel + gyro · 0x68</text>
+  <text x="826" y="364" font-size="12" fill="#333">VCC</text>
+  <text x="826" y="389" font-size="12" fill="#333">GND</text>
+  <text x="826" y="414" font-size="12" fill="#333">SDA</text>
+  <text x="826" y="439" font-size="12" fill="#333">SCL</text>
+  <rect x="812" y="356" width="8" height="8" fill="#f57c00"/>
+  <rect x="812" y="381" width="8" height="8" fill="#222"/>
+  <rect x="812" y="406" width="8" height="8" fill="#1976d2"/>
+  <rect x="812" y="431" width="8" height="8" fill="#388e3c"/>
+
+  <rect x="820" y="470" width="210" height="120" rx="8" fill="#fff" stroke="#333" stroke-width="2"/>
+  <text x="925" y="492" text-anchor="middle" font-size="14" font-weight="bold" fill="#222">OLED 128×64</text>
+  <text x="925" y="509" text-anchor="middle" font-size="11" fill="#555">SSD1306 I2C · 0x3C</text>
+  <text x="826" y="534" font-size="12" fill="#333">VCC</text>
+  <text x="826" y="559" font-size="12" fill="#333">GND</text>
+  <text x="826" y="584" font-size="12" fill="#333">SDA</text>
+  <text x="826" y="606" font-size="12" fill="#333">SCL</text>
+  <rect x="812" y="526" width="8" height="8" fill="#f57c00"/>
+  <rect x="812" y="551" width="8" height="8" fill="#222"/>
+  <rect x="812" y="576" width="8" height="8" fill="#1976d2"/>
+  <rect x="812" y="598" width="8" height="8" fill="#388e3c"/>
+
+  <!-- 3V3 trunk (orange) x=720 -->
+  <polyline points="694,360 720,360" fill="none" stroke="#f57c00" stroke-width="3"/>
+  <polyline points="720,330 720,530" fill="none" stroke="#f57c00" stroke-width="3"/>
+  <polyline points="720,330 812,330" fill="none" stroke="#f57c00" stroke-width="3"/>
+  <polyline points="720,530 812,530" fill="none" stroke="#f57c00" stroke-width="3"/>
+  <circle cx="720" cy="360" r="4" fill="#f57c00"/>
+
+  <!-- GND trunk (black) x=740 -->
+  <polyline points="694,400 740,400" fill="none" stroke="#222222" stroke-width="3"/>
+  <polyline points="740,385 740,555" fill="none" stroke="#222222" stroke-width="3"/>
+  <polyline points="740,385 812,385" fill="none" stroke="#222222" stroke-width="3"/>
+  <polyline points="740,555 812,555" fill="none" stroke="#222222" stroke-width="3"/>
+  <circle cx="740" cy="400" r="4" fill="#222222"/>
+
+  <!-- SDA trunk (blue) x=762 -->
+  <polyline points="694,450 762,450" fill="none" stroke="#1976d2" stroke-width="3"/>
+  <polyline points="762,410 762,580" fill="none" stroke="#1976d2" stroke-width="3"/>
+  <polyline points="762,410 812,410" fill="none" stroke="#1976d2" stroke-width="3"/>
+  <polyline points="762,580 812,580" fill="none" stroke="#1976d2" stroke-width="3"/>
+  <circle cx="762" cy="450" r="4" fill="#1976d2"/>
+
+  <!-- SCL trunk (green) x=784 -->
+  <polyline points="694,490 784,490" fill="none" stroke="#388e3c" stroke-width="3"/>
+  <polyline points="784,435 784,602" fill="none" stroke="#388e3c" stroke-width="3"/>
+  <polyline points="784,435 812,435" fill="none" stroke="#388e3c" stroke-width="3"/>
+  <polyline points="784,602 812,602" fill="none" stroke="#388e3c" stroke-width="3"/>
+  <circle cx="784" cy="490" r="4" fill="#388e3c"/>
+
+  <!-- ===== Buzzer + BC337 ===== -->
+  <rect x="430" y="640" width="90" height="70" rx="6" fill="#fff" stroke="#333" stroke-width="2"/>
+  <text x="475" y="672" text-anchor="middle" font-size="12" font-weight="bold" fill="#222">BC337</text>
+  <text x="475" y="688" text-anchor="middle" font-size="10" fill="#555">NPN</text>
+  <text x="424" y="679" font-size="10" text-anchor="end" fill="#333">B</text>
+  <text x="528" y="664" font-size="10" fill="#333">C</text>
+  <text x="480" y="726" font-size="10" fill="#333">E</text>
+
+  <rect x="320" y="662" width="60" height="26" rx="4" fill="#fff" stroke="#333"/><text x="350" y="680" text-anchor="middle" font-size="11" fill="#222">1 kΩ</text>
+
+  <rect x="600" y="620" width="170" height="56" rx="6" fill="#fff" stroke="#333" stroke-width="2"/>
+  <text x="685" y="644" text-anchor="middle" font-size="12" font-weight="bold" fill="#222">PIEZO BUZZER</text>
+  <text x="685" y="662" text-anchor="middle" font-size="11" fill="#555">PK-20A38WQ</text>
+  <text x="626" y="616" font-size="11" fill="#d32f2f">+</text>
+
+  <!-- base wire (purple): G25 -> 1k -> B -->
+  <polyline points="470,554 470,600 300,600 300,675 320,675" fill="none" stroke="#7b1fa2" stroke-width="3"/>
+  <polyline points="380,675 430,675" fill="none" stroke="#7b1fa2" stroke-width="3"/>
+
+  <!-- +5V (red): ESP32 5V -> buzzer + -->
+  <polyline points="615,554 615,595 660,595 660,620" fill="none" stroke="#d32f2f" stroke-width="3"/>
+
+  <!-- buzzer drive terminal -> collector (black-ish signal) -->
+  <polyline points="660,676 660,700 560,700 560,660 520,660" fill="none" stroke="#222222" stroke-width="3"/>
+
+  <!-- emitter -> GND (ESP32 bottom GND) -->
+  <polyline points="475,710 475,750 545,750 545,554" fill="none" stroke="#222222" stroke-width="3"/>
+
+  <text x="560" y="784" text-anchor="middle" font-size="11" fill="#888">MPU 0x68 &amp; OLED 0x3C share one I2C bus (GPIO21 SDA / GPIO22 SCL). Set LM2596 to 5.0 V before connecting the ESP32.</text>
+</svg>

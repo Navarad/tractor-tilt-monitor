@@ -20,6 +20,10 @@ threshold is exceeded.
 - **S-BOX 116B** enclosure — mounting in the cabin
 - **ZY-60 breadboard** — prototyping before soldering
 
+## Wiring diagram
+
+![Wiring diagram](docs/wiring.svg)
+
 ## Wiring to the central unit (ESP-WROOM-32)
 
 ### GY-521 (MPU-6050) — I2C
