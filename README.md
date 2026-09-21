@@ -10,7 +10,7 @@ threshold is exceeded.
 
 ## Components
 
-- **ESP-WROOM-32** dev board (USB-C, CH340) — the central unit / brain
+- **ESP32 DevKit** (30-pin, CH340, USB-C) — the central unit / brain
 - **GY-521 (MPU-6050)** — accelerometer + gyroscope, I2C, measures tilt
 - **OLED 0.96" 128x64, I2C (SSD1306)** — shows tilt angles and status
 - **HITPOINT PK-20A38WQ** piezo buzzer — audible alarm
@@ -19,61 +19,84 @@ threshold is exceeded.
 - **S-BOX 116B** enclosure — mounting in the cabin
 - **ZY-60 breadboard** — prototyping before soldering
 
-Powered by **USB 5 V** from the tractor's USB port — just plug into the ESP32's
-USB-C. (A CREATALL CA-2596 / LM2596 step-down is only needed if you instead wire
-it to a raw 12 V circuit — not the case here.)
+Powered by **USB 5 V** from the tractor's USB port — just plug into the DevKit's
+USB-C. Every wire this build needs sits on the DevKit's **bottom pin row**
+(`3V3 · GND · … · D21 · … · D22 · D23`), so it works even when the board covers
+one side of the breadboard. (A CREATALL CA-2596 / LM2596 step-down is only needed
+if you instead wire it to a raw 12 V circuit — not the case here.)
 
 ## Wiring diagram
 
 ![Wiring diagram](docs/wiring.svg)
 
-## Wiring to the central unit (ESP-WROOM-32)
+## Wiring to the central unit (ESP32 DevKit)
+
+Pin names below are the **silkscreen labels on the 30-pin DevKit**. Wire the
+sensor/OLED modules **by their labels** (VCC/GND/SDA/SCL) — the physical pin order
+on those boards varies, but the labels don't.
 
 ### GY-521 (MPU-6050) — I2C
-| MPU-6050 pin | ESP32 pin |
+| MPU-6050 pin | DevKit pin |
 |---|---|
 | VCC | 3V3 |
 | GND | GND |
-| SDA | GPIO21 |
-| SCL | GPIO22 |
+| SDA | D21 (GPIO21) |
+| SCL | D22 (GPIO22) |
 
 ### OLED SSD1306 — I2C (shares the bus with the MPU)
-| OLED pin | ESP32 pin |
+| OLED pin | DevKit pin |
 |---|---|
 | VCC | 3V3 |
 | GND | GND |
-| SDA | GPIO21 |
-| SCL | GPIO22 |
+| SDA | D21 (GPIO21) |
+| SCL | D22 (GPIO22) |
 
 The MPU is at I2C address `0x68`, the OLED at `0x3C` — no conflict on the shared bus.
 
+⚠️ **Keep the sensors on 3V3, never 5 V.** Their onboard pull-ups would otherwise
+push 5 V onto SDA/SCL, and the ESP32 is **not** 5 V-tolerant.
+
 ### Buzzer via BC337 (NPN, low-side switch)
 ```
-GPIO25 ──[ 1k ]── B (BC337 base)
-                  C ── one buzzer terminal
-                  E ── GND
-   +5V ───────────── other buzzer terminal
+D23 ──[ 1k ]── B (BC337 base)
+               C ── buzzer "drive" terminal   (NOT ground!)
+               E ── GND
+3V3 ───────────── buzzer "+" terminal
 ```
 - BC337 pinout (flat side facing you, leads down): **C – B – E** (verify in the
   DIOTEC 171553 datasheet).
-- For a louder alarm, tie the buzzer's high side to +12 V instead of +5 V
-  (the PK-20A38WQ tolerates it); the emitter still goes to GND, logic unchanged.
+- The buzzer's low side goes to the **collector**, not to ground — the transistor
+  switches it to GND. Only the **emitter** is grounded.
+- Driven from **3V3** it is a bit quieter. Want it louder? Tie the buzzer's `+` to
+  the `VIN` pin (USB 5 V) instead — but `VIN` is on the top pin row, so you'd need
+  access to the other side of the board (e.g. a second breadboard). Logic unchanged.
 
 ### Zero / level button
 The onboard **BOOT button (GPIO0)** is used to zero the tilt on flat ground
-(see Calibration).
+(see Calibration). No external wiring needed.
+
+## Single-side breadboard wiring
+
+These wide DevKits cover most of the breadboard, often leaving only one free hole
+per pin on **one** side. That's enough because every pin this build uses is on the
+**bottom row**. Trick for fanning out power to several modules:
+
+1. One wire **3V3 → red (+) rail**, one wire **GND → blue (−) rail**.
+2. Power the MPU, OLED and buzzer `+` from the **rails** (plenty of holes).
+3. From the board itself you then only run: **D21** (SDA), **D22** (SCL), **D23**
+   (buzzer), plus the two rail feeds.
 
 ## Power (USB)
 
-Plug the ESP32's **USB-C** into the tractor's **USB port (5 V)** — that's it. The
-buzzer's high side is tied to the ESP32 `5V` pin, which carries that USB 5 V.
+Plug the DevKit's **USB-C** into the tractor's **USB port (5 V)** — that's it. The
+on-board regulator makes the 3V3 that powers the sensors, OLED and buzzer.
 
 - During engine **cranking** the USB rail can dip and briefly reset the ESP32.
   Harmless here, but if it bothers you, power it up after starting, or add a
   ~470 µF cap across 5 V / GND.
 - Make sure the port can supply ~500 mA (most can).
 - If you ever power it from a raw **12 V** line instead, put an LM2596 step-down
-  set to **5.0 V** (plus a fuse and reverse-polarity diode) ahead of the ESP32.
+  set to **5.0 V** (plus a fuse and reverse-polarity diode) ahead of the DevKit.
 
 ## Calibration & setup
 

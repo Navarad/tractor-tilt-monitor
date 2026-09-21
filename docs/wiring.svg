@@ -3,23 +3,23 @@
   <rect x="4" y="4" width="1112" height="792" fill="none" stroke="#cccccc" stroke-width="2"/>
 
   <text x="560" y="36" text-anchor="middle" font-size="24" font-weight="bold" fill="#111">Tractor Tilt Monitor — Wiring</text>
-  <text x="560" y="58" text-anchor="middle" font-size="14" fill="#555">Kubota EK1-261 · ESP-WROOM-32 central unit · USB powered</text>
+  <text x="560" y="58" text-anchor="middle" font-size="14" fill="#555">Kubota EK1-261 · ESP32 DevKit (30-pin) · USB powered · buzzer on D23, driven from 3V3</text>
 
   <!-- ===== Legend ===== -->
   <rect x="812" y="72" width="296" height="176" rx="8" fill="#fafafa" stroke="#ccc"/>
   <text x="826" y="94" font-size="13" font-weight="bold" fill="#333">Wire legend</text>
-  <line x1="826" y1="112" x2="866" y2="112" stroke="#d32f2f" stroke-width="4"/><text x="874" y="116" font-size="13" fill="#333">+5 V power</text>
-  <line x1="826" y1="132" x2="866" y2="132" stroke="#222222" stroke-width="4"/><text x="874" y="136" font-size="13" fill="#333">GND</text>
-  <line x1="826" y1="152" x2="866" y2="152" stroke="#f57c00" stroke-width="4"/><text x="874" y="156" font-size="13" fill="#333">3V3</text>
-  <line x1="826" y1="172" x2="866" y2="172" stroke="#1976d2" stroke-width="4"/><text x="874" y="176" font-size="13" fill="#333">SDA (I2C data)</text>
-  <line x1="826" y1="192" x2="866" y2="192" stroke="#388e3c" stroke-width="4"/><text x="874" y="196" font-size="13" fill="#333">SCL (I2C clock)</text>
-  <line x1="826" y1="212" x2="866" y2="212" stroke="#7b1fa2" stroke-width="4"/><text x="874" y="216" font-size="13" fill="#333">GPIO signal</text>
-  <line x1="826" y1="232" x2="866" y2="232" stroke="#00838f" stroke-width="4"/><text x="874" y="236" font-size="13" fill="#333">buzzer drive (switched, NOT gnd)</text>
+  <line x1="826" y1="112" x2="866" y2="112" stroke="#222222" stroke-width="4"/><text x="874" y="116" font-size="13" fill="#333">GND</text>
+  <line x1="826" y1="132" x2="866" y2="132" stroke="#f57c00" stroke-width="4"/><text x="874" y="136" font-size="13" fill="#333">3V3 (also powers buzzer)</text>
+  <line x1="826" y1="152" x2="866" y2="152" stroke="#1976d2" stroke-width="4"/><text x="874" y="156" font-size="13" fill="#333">SDA (I2C data)</text>
+  <line x1="826" y1="172" x2="866" y2="172" stroke="#388e3c" stroke-width="4"/><text x="874" y="176" font-size="13" fill="#333">SCL (I2C clock)</text>
+  <line x1="826" y1="192" x2="866" y2="192" stroke="#7b1fa2" stroke-width="4"/><text x="874" y="196" font-size="13" fill="#333">GPIO signal (D23)</text>
+  <line x1="826" y1="212" x2="866" y2="212" stroke="#00838f" stroke-width="4"/><text x="874" y="216" font-size="13" fill="#333">buzzer drive (switched, NOT gnd)</text>
+  <line x1="826" y1="232" x2="866" y2="232" stroke="#666666" stroke-width="4"/><text x="874" y="236" font-size="13" fill="#333">USB 5 V cable (to board)</text>
 
   <!-- ===== ESP32 central unit ===== -->
   <rect x="420" y="300" width="270" height="250" rx="10" fill="#eef2ff" stroke="#334" stroke-width="2"/>
-  <text x="555" y="326" text-anchor="middle" font-size="17" font-weight="bold" fill="#223">ESP-WROOM-32</text>
-  <text x="555" y="345" text-anchor="middle" font-size="12" fill="#556">central unit</text>
+  <text x="555" y="326" text-anchor="middle" font-size="17" font-weight="bold" fill="#223">ESP32 DevKit</text>
+  <text x="555" y="345" text-anchor="middle" font-size="12" fill="#556">30-pin · CH340 · USB-C</text>
 
   <!-- USB-C port on ESP32 left edge -->
   <rect x="412" y="398" width="10" height="26" rx="3" fill="#444"/>
@@ -28,11 +28,11 @@
   <!-- ESP32 pin labels (right + bottom) -->
   <rect x="686" y="356" width="8" height="8" fill="#333"/><text x="682" y="364" font-size="12" text-anchor="end" fill="#223">3V3</text>
   <rect x="686" y="396" width="8" height="8" fill="#333"/><text x="682" y="404" font-size="12" text-anchor="end" fill="#223">GND</text>
-  <rect x="686" y="446" width="8" height="8" fill="#333"/><text x="682" y="454" font-size="12" text-anchor="end" fill="#223">G21 / SDA</text>
-  <rect x="686" y="486" width="8" height="8" fill="#333"/><text x="682" y="494" font-size="12" text-anchor="end" fill="#223">G22 / SCL</text>
-  <rect x="466" y="546" width="8" height="8" fill="#333"/><text x="470" y="540" font-size="12" text-anchor="middle" fill="#223">G25</text>
+  <rect x="686" y="446" width="8" height="8" fill="#333"/><text x="682" y="454" font-size="12" text-anchor="end" fill="#223">D21 / SDA</text>
+  <rect x="686" y="486" width="8" height="8" fill="#333"/><text x="682" y="494" font-size="12" text-anchor="end" fill="#223">D22 / SCL</text>
+  <rect x="466" y="546" width="8" height="8" fill="#333"/><text x="470" y="540" font-size="12" text-anchor="middle" fill="#223">D23</text>
   <rect x="541" y="546" width="8" height="8" fill="#333"/><text x="545" y="540" font-size="12" text-anchor="middle" fill="#223">GND</text>
-  <rect x="611" y="546" width="8" height="8" fill="#333"/><text x="615" y="540" font-size="12" text-anchor="middle" fill="#223">5V (VIN)</text>
+  <rect x="611" y="546" width="8" height="8" fill="#333"/><text x="615" y="540" font-size="12" text-anchor="middle" fill="#223">3V3</text>
 
   <!-- ===== USB power source ===== -->
   <rect x="90" y="378" width="160" height="76" rx="8" fill="#fff" stroke="#333" stroke-width="2"/>
@@ -94,8 +94,7 @@
   <polyline points="784,602 812,602" fill="none" stroke="#388e3c" stroke-width="3"/>
   <circle cx="784" cy="490" r="4" fill="#388e3c"/>
 
-  <!-- ===== Buzzer + BC337 (clean: emitter straight up to GND, both buzzer pins on top) ===== -->
-  <!-- BC337: emitter on top (to GND above), collector on bottom (to buzzer below), base on left -->
+  <!-- ===== Buzzer + BC337 ===== -->
   <rect x="502" y="600" width="86" height="64" rx="6" fill="#fff" stroke="#333" stroke-width="2"/>
   <text x="545" y="628" text-anchor="middle" font-size="12" font-weight="bold" fill="#222">BC337</text>
   <text x="545" y="644" text-anchor="middle" font-size="10" fill="#555">NPN</text>
@@ -111,20 +110,20 @@
   <text x="565" y="726" text-anchor="middle" font-size="12" font-weight="bold" fill="#222">PIEZO BUZZER</text>
   <text x="565" y="744" text-anchor="middle" font-size="11" fill="#555">PK-20A38WQ</text>
   <text x="505" y="694" font-size="11" fill="#00838f" text-anchor="middle">drive</text>
-  <text x="622" y="694" font-size="11" fill="#d32f2f" text-anchor="middle">+</text>
+  <text x="622" y="694" font-size="11" fill="#f57c00" text-anchor="middle">+</text>
 
   <!-- EMITTER -> GND : short straight wire up to ESP32 GND pin -->
   <polyline points="545,600 545,556" fill="none" stroke="#222222" stroke-width="3"/>
 
-  <!-- BASE : G25 -> 1k -> B -->
+  <!-- BASE : D23 -> 1k -> B -->
   <polyline points="470,554 470,596 350,596 350,632 378,632" fill="none" stroke="#7b1fa2" stroke-width="3"/>
   <polyline points="438,632 502,632" fill="none" stroke="#7b1fa2" stroke-width="3"/>
 
   <!-- COLLECTOR -> buzzer 'drive' : switched load (teal, NOT ground) -->
   <polyline points="545,664 545,682 505,682 505,700" fill="none" stroke="#00838f" stroke-width="3"/>
 
-  <!-- +5V -> buzzer '+' -->
-  <polyline points="615,554 615,682 622,682 622,700" fill="none" stroke="#d32f2f" stroke-width="3"/>
+  <!-- 3V3 -> buzzer '+' -->
+  <polyline points="615,554 615,682 622,682 622,700" fill="none" stroke="#f57c00" stroke-width="3"/>
 
-  <text x="560" y="784" text-anchor="middle" font-size="11" fill="#888">Buzzer low side goes to the BC337 collector (teal) — the transistor switches it to GND. Only the emitter is grounded.</text>
+  <text x="560" y="782" text-anchor="middle" font-size="11" fill="#888">All wires use bottom-row pins (3V3, GND, D21, D22, D23). Fan out 3V3 &amp; GND via the breadboard power rails. Keep sensors on 3V3 — never 5 V.</text>
 </svg>
