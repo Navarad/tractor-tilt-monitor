@@ -33,7 +33,7 @@ const float TILT_WARN   = 12.0;   // zlta zona: zacni davat pozor
 const float TILT_DANGER = 20.0;   // cervena zona: hrozi prevratenie
 
 // Piny
-const int PIN_BUZZER = 25;   // -> 1k odpor -> baza BC337
+const int PIN_BUZZER = 23;   // -> 1k odpor -> baza BC337 (D23, dolny rad DevKitu)
 const int PIN_ZERO   = 0;    // onboard BOOT tlacidlo = "vynuluj na rovine"
 
 // I2C
