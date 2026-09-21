@@ -32,7 +32,7 @@
   <rect x="686" y="486" width="8" height="8" fill="#333"/><text x="682" y="494" font-size="12" text-anchor="end" fill="#223">G22 / SCL</text>
   <rect x="466" y="546" width="8" height="8" fill="#333"/><text x="470" y="540" font-size="12" text-anchor="middle" fill="#223">G25</text>
   <rect x="541" y="546" width="8" height="8" fill="#333"/><text x="545" y="540" font-size="12" text-anchor="middle" fill="#223">GND</text>
-  <rect x="611" y="546" width="8" height="8" fill="#333"/><text x="615" y="540" font-size="12" text-anchor="middle" fill="#223">5V</text>
+  <rect x="611" y="546" width="8" height="8" fill="#333"/><text x="615" y="540" font-size="12" text-anchor="middle" fill="#223">5V (VIN)</text>
 
   <!-- ===== USB power source ===== -->
   <rect x="90" y="378" width="160" height="76" rx="8" fill="#fff" stroke="#333" stroke-width="2"/>
